@@ -98,6 +98,7 @@ type Workspace = {
 };
 
 type NavKey = "dashboard" | "project" | "discover" | "cases" | "reports";
+type ImportMode = "openapi" | "postman" | "har" | "curl" | "manual";
 
 const apiBase = import.meta.env.VITE_API_BASE ?? "http://localhost:4318";
 const githubRepoUrl = "https://github.com/StarSure/testclaw";
@@ -114,8 +115,12 @@ function App() {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const [projectDraft, setProjectDraft] = useState<Project | null>(null);
   const [selectedNav, setSelectedNav] = useState<NavKey>("dashboard");
+  const [importMode, setImportMode] = useState<ImportMode>("openapi");
   const [selectedEndpoint, setSelectedEndpoint] = useState<string | null>(null);
+  const [openApiText, setOpenApiText] = useState(defaultOpenApiText);
+  const [postmanText, setPostmanText] = useState(defaultPostmanText);
   const [harText, setHarText] = useState("");
+  const [curlText, setCurlText] = useState(defaultCurlText);
   const [manualText, setManualText] = useState(defaultManualJson);
   const [statusMessage, setStatusMessage] = useState("准备就绪，可以开始导入接口流量。");
   const [busy, setBusy] = useState(false);
@@ -173,6 +178,39 @@ function App() {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(parsed)
+      });
+      await loadWorkspace();
+    });
+  }
+
+  async function importOpenApi() {
+    await action("OpenAPI 已导入，并完成接口发现。", async () => {
+      await fetch(`${apiBase}/api/import/openapi`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ content: openApiText })
+      });
+      await loadWorkspace();
+    });
+  }
+
+  async function importPostman() {
+    await action("Postman Collection 已导入，并完成接口发现。", async () => {
+      await fetch(`${apiBase}/api/import/postman`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ content: postmanText })
+      });
+      await loadWorkspace();
+    });
+  }
+
+  async function importCurl() {
+    await action("cURL 已导入，并完成接口发现。", async () => {
+      await fetch(`${apiBase}/api/import/curl`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ content: curlText })
       });
       await loadWorkspace();
     });
@@ -296,7 +334,7 @@ function App() {
             <Panel title="平台说明" icon={<Bot size={18} />}>
               <div className="info-block">
                 <p>当前版本聚焦接口自动化测试。</p>
-                <p>你可以导入网页平台的 HAR 流量或请求样本，系统会自动识别业务接口、生成测试用例，并执行回归检查。</p>
+                <p>你可以导入 OpenAPI、Postman、HAR、cURL 或请求样本，系统会自动识别业务接口、生成测试用例，并执行回归检查。</p>
                 <p>后续会继续接入网页录制、Playwright 抓接口、测试历史持久化和 GitHub 集成。</p>
               </div>
             </Panel>
@@ -390,35 +428,103 @@ function App() {
 
         {selectedNav === "discover" ? (
           <section className="content-grid two-col">
-            <Panel title="导入接口流量" icon={<Upload size={18} />}>
+            <Panel title="接口导入" icon={<Upload size={18} />}>
               <div className="info-block">
-                <p>支持两种方式：</p>
-                <p>1. 上传 HAR 文件</p>
-                <p>2. 粘贴请求 JSON 样本</p>
+                <p>支持多种常见导入方式，适合不同团队的现有资产。</p>
               </div>
 
-              <label className="upload-button">
-                <FileUp size={16} />
-                选择 HAR 文件
-                <input type="file" accept=".har,.json,application/json" onChange={loadHarFile} />
-              </label>
+              <div className="import-tabs">
+                <button className={`import-tab ${importMode === "openapi" ? "active" : ""}`} onClick={() => setImportMode("openapi")}>
+                  OpenAPI
+                </button>
+                <button className={`import-tab ${importMode === "postman" ? "active" : ""}`} onClick={() => setImportMode("postman")}>
+                  Postman
+                </button>
+                <button className={`import-tab ${importMode === "har" ? "active" : ""}`} onClick={() => setImportMode("har")}>
+                  HAR
+                </button>
+                <button className={`import-tab ${importMode === "curl" ? "active" : ""}`} onClick={() => setImportMode("curl")}>
+                  cURL
+                </button>
+                <button className={`import-tab ${importMode === "manual" ? "active" : ""}`} onClick={() => setImportMode("manual")}>
+                  手动 JSON
+                </button>
+              </div>
 
-              <label className="field-label">HAR 内容</label>
-              <textarea
-                value={harText}
-                onChange={(event) => setHarText(event.target.value)}
-                className="code-input compact"
-                placeholder="将浏览器导出的 HAR 文件内容粘贴到这里"
-              />
-              <button className="secondary-button inline-button" onClick={importHar} disabled={busy || !harText.trim()}>
-                导入 HAR
-              </button>
+              {importMode === "openapi" ? (
+                <>
+                  <label className="field-label">OpenAPI / Swagger 内容</label>
+                  <textarea
+                    value={openApiText}
+                    onChange={(event) => setOpenApiText(event.target.value)}
+                    className="code-input"
+                    placeholder="支持 JSON 或 YAML"
+                  />
+                  <button className="primary-button inline-button" onClick={importOpenApi} disabled={busy}>
+                    导入 OpenAPI
+                  </button>
+                </>
+              ) : null}
 
-              <label className="field-label">请求 JSON 样本</label>
-              <textarea value={manualText} onChange={(event) => setManualText(event.target.value)} className="code-input" />
-              <button className="primary-button inline-button" onClick={importManual} disabled={busy}>
-                导入请求样本
-              </button>
+              {importMode === "postman" ? (
+                <>
+                  <label className="field-label">Postman Collection 内容</label>
+                  <textarea
+                    value={postmanText}
+                    onChange={(event) => setPostmanText(event.target.value)}
+                    className="code-input"
+                    placeholder="粘贴 Postman Collection JSON"
+                  />
+                  <button className="primary-button inline-button" onClick={importPostman} disabled={busy}>
+                    导入 Postman
+                  </button>
+                </>
+              ) : null}
+
+              {importMode === "har" ? (
+                <>
+                  <label className="upload-button">
+                    <FileUp size={16} />
+                    选择 HAR 文件
+                    <input type="file" accept=".har,.json,application/json" onChange={loadHarFile} />
+                  </label>
+                  <label className="field-label">HAR 内容</label>
+                  <textarea
+                    value={harText}
+                    onChange={(event) => setHarText(event.target.value)}
+                    className="code-input compact"
+                    placeholder="将浏览器导出的 HAR 文件内容粘贴到这里"
+                  />
+                  <button className="secondary-button inline-button" onClick={importHar} disabled={busy || !harText.trim()}>
+                    导入 HAR
+                  </button>
+                </>
+              ) : null}
+
+              {importMode === "curl" ? (
+                <>
+                  <label className="field-label">cURL 命令</label>
+                  <textarea
+                    value={curlText}
+                    onChange={(event) => setCurlText(event.target.value)}
+                    className="code-input compact"
+                    placeholder="粘贴 curl 命令"
+                  />
+                  <button className="primary-button inline-button" onClick={importCurl} disabled={busy}>
+                    导入 cURL
+                  </button>
+                </>
+              ) : null}
+
+              {importMode === "manual" ? (
+                <>
+                  <label className="field-label">请求 JSON 样本</label>
+                  <textarea value={manualText} onChange={(event) => setManualText(event.target.value)} className="code-input" />
+                  <button className="primary-button inline-button" onClick={importManual} disabled={busy}>
+                    导入请求样本
+                  </button>
+                </>
+              ) : null}
             </Panel>
 
             <Panel title="接口发现结果" icon={<Braces size={18} />}>
@@ -706,6 +812,76 @@ const defaultManualJson = JSON.stringify(
             }
           ]
         }
+      }
+    ]
+  },
+  null,
+  2
+);
+
+const defaultCurlText = `curl -X POST "https://demo-shop.local/api/login" \\
+  -H "Content-Type: application/json" \\
+  -d '{"email":"{{TEST_USER_EMAIL}}","password":"{{TEST_USER_PASSWORD}}"}'`;
+
+const defaultOpenApiText = `openapi: 3.0.0
+info:
+  title: Demo API
+  version: 1.0.0
+servers:
+  - url: https://demo-shop.local
+paths:
+  /api/login:
+    post:
+      summary: User login
+      requestBody:
+        content:
+          application/json:
+            example:
+              email: "{{TEST_USER_EMAIL}}"
+              password: "{{TEST_USER_PASSWORD}}"
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                token: "sample-token"
+                user:
+                  id: "u_1001"`;
+
+const defaultPostmanText = JSON.stringify(
+  {
+    info: {
+      name: "Demo Collection"
+    },
+    item: [
+      {
+        name: "Login",
+        request: {
+          method: "POST",
+          header: [
+            {
+              key: "Content-Type",
+              value: "application/json"
+            }
+          ],
+          url: {
+            raw: "https://demo-shop.local/api/login"
+          },
+          body: {
+            raw: JSON.stringify({
+              email: "{{TEST_USER_EMAIL}}",
+              password: "{{TEST_USER_PASSWORD}}"
+            })
+          }
+        },
+        response: [
+          {
+            code: 200,
+            body: JSON.stringify({
+              token: "sample-token"
+            })
+          }
+        ]
       }
     ]
   },

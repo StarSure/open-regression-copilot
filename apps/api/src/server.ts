@@ -5,6 +5,7 @@ import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { z } from "zod";
 import { parseHar, runTestCases } from "./discovery.js";
+import { parseCurl, parseOpenApi, parsePostmanCollection } from "./importers.js";
 import { createWorkspace, initStorage, loadState, replaceWorkspace, saveState, updateProject } from "./storage.js";
 import type { ProjectSettings, RawRequest, WorkspaceState } from "./types.js";
 
@@ -94,6 +95,64 @@ app.post("/api/discover/har", async (request, reply) => {
       ok: false,
       error: String(error)
     });
+  }
+});
+
+const textImportSchema = z.object({
+  content: z.string().min(1)
+});
+
+app.post("/api/import/openapi", async (request, reply) => {
+  const result = textImportSchema.safeParse(request.body);
+  if (!result.success) {
+    return reply.status(400).send({ ok: false, error: result.error.flatten() });
+  }
+
+  try {
+    const requests = parseOpenApi(result.data.content);
+    state = replaceWorkspace(state, requests);
+    state.updatedAt = new Date().toISOString();
+    await saveState(state);
+
+    return { ok: true, importedRequests: requests.length, workspace: serializeState(state) };
+  } catch (error) {
+    return reply.status(400).send({ ok: false, error: String(error) });
+  }
+});
+
+app.post("/api/import/postman", async (request, reply) => {
+  const result = textImportSchema.safeParse(request.body);
+  if (!result.success) {
+    return reply.status(400).send({ ok: false, error: result.error.flatten() });
+  }
+
+  try {
+    const requests = parsePostmanCollection(result.data.content);
+    state = replaceWorkspace(state, requests);
+    state.updatedAt = new Date().toISOString();
+    await saveState(state);
+
+    return { ok: true, importedRequests: requests.length, workspace: serializeState(state) };
+  } catch (error) {
+    return reply.status(400).send({ ok: false, error: String(error) });
+  }
+});
+
+app.post("/api/import/curl", async (request, reply) => {
+  const result = textImportSchema.safeParse(request.body);
+  if (!result.success) {
+    return reply.status(400).send({ ok: false, error: result.error.flatten() });
+  }
+
+  try {
+    const requests = parseCurl(result.data.content);
+    state = replaceWorkspace(state, requests);
+    state.updatedAt = new Date().toISOString();
+    await saveState(state);
+
+    return { ok: true, importedRequests: requests.length, workspace: serializeState(state) };
+  } catch (error) {
+    return reply.status(400).send({ ok: false, error: String(error) });
   }
 });
 

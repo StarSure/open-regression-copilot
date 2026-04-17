@@ -4,7 +4,10 @@
 
 当前版本可以：
 
+- 导入 OpenAPI / Swagger
+- 导入 Postman Collection
 - 导入 HAR 文件
+- 导入 cURL
 - 导入请求 JSON 样本
 - 自动识别接口
 - 自动生成接口测试用例
@@ -27,18 +30,28 @@
 - 预发环境
 - Demo 环境
 
-## 4. 这个项目和普通 API 测试工具有什么不同？
+## 4. 现在支持哪些导入方式？
+
+当前支持：
+
+- OpenAPI / Swagger
+- Postman Collection
+- HAR
+- cURL
+- 手动 JSON 请求样本
+
+## 5. 这个项目和普通 API 测试工具有什么不同？
 
 区别在于它不是单纯的接口调试工具，而是希望把“网页业务流量 -> 接口资产 -> 测试用例 -> 执行报告”串成一个完整工作流。
 
-## 5. 后续会支持什么？
+## 6. 后续会支持什么？
 
 后续计划支持：
 
+- Apifox 导入
 - Playwright 网页录制
 - 自动抓接口
 - 测试历史记录
 - SQLite / PostgreSQL
 - GitHub 集成
 - Docker Compose 部署
-

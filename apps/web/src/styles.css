@@ -377,6 +377,27 @@ button {
   display: none;
 }
 
+.import-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.import-tab {
+  padding: 8px 12px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 700;
+}
+
+.import-tab.active {
+  color: #fff;
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
 .endpoint-row,
 .test-card,
 .run-card,
@@ -653,4 +674,3 @@ pre {
     grid-template-columns: 1fr;
   }
 }
-
