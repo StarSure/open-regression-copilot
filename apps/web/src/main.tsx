@@ -268,14 +268,14 @@ function App() {
             <Radar size={18} />
           </span>
           <div>
-            <strong>TestClaw</strong>
+            <strong>AITestAutomate</strong>
             <small>AI Testing Platform</small>
           </div>
         </div>
 
         <div className="sidebar-project">
           <span className="sidebar-label">当前项目</span>
-          <strong>TestClaw</strong>
+          <strong>AITestAutomate</strong>
           <small>{workspace?.project.environmentName ?? "-"}</small>
         </div>
 
@@ -307,7 +307,7 @@ function App() {
       <section className="main-panel">
         <header className="page-header">
           <div>
-            <h1>TestClaw</h1>
+            <h1>AITestAutomate</h1>
             <p>面向测试团队的接口发现、测试生成与回归执行平台。</p>
           </div>
           <div className="header-actions">

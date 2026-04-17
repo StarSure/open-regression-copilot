@@ -5,10 +5,10 @@ import { discoverEndpoints, generateTestCases } from "./discovery.js";
 import { sampleRequests } from "./sampleData.js";
 import type { ProjectSettings, RawRequest, WorkspaceState } from "./types.js";
 
-const dbPath = resolve(process.cwd(), ".data", "testclaw.db");
+const dbPath = resolve(process.cwd(), ".data", "aitestautomate.db");
 
 const defaultProject: ProjectSettings = {
-  name: "TestClaw",
+  name: "AITestAutomate",
   description: "面向测试团队的开源 AI 自动化测试平台。",
   baseUrl: "https://demo-shop.local",
   environmentName: "staging",
@@ -108,8 +108,8 @@ function hydrateState(parsed: WorkspaceState): WorkspaceState {
     ...parsed.project
   };
 
-  if (project.name === "Demo Shop Regression Lab" || project.name === "AI测试平台") {
-    project.name = "TestClaw";
+  if (project.name === "Demo Shop Regression Lab" || project.name === "AI测试平台" || project.name === "TestClaw") {
+    project.name = "AITestAutomate";
   }
 
   if (project.description === "Community edition workspace for API discovery and regression testing.") {

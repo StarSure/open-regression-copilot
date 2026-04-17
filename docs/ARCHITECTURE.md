@@ -109,7 +109,7 @@ Queue:
 ## Suggested Monorepo Structure
 
 ```text
-open-regression-copilot/
+AITestAutomate/
   apps/
     web/
     api/

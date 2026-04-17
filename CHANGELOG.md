@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Built the first public MVP of TestClaw.
+- Built the first public MVP of AITestAutomate.
 - Added a Chinese control panel with left navigation and right work area.
 - Added API discovery from OpenAPI, Postman, HAR, cURL, and manual request samples.
 - Added automatic API inventory generation and test case generation.
@@ -17,6 +17,6 @@ All notable changes to this project will be documented in this file.
 
 ### Updated
 
-- Updated project branding to `TestClaw`.
+- Updated project branding to `AITestAutomate`.
 - Updated documentation to reflect multi-source import support.
 - Updated the sidebar footer to link directly to the GitHub repository.

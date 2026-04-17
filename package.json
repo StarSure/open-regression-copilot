@@ -1,18 +1,18 @@
 {
-  "name": "testclaw",
+  "name": "AITestAutomate",
   "version": "0.1.0",
   "private": true,
-  "description": "TestClaw is an open-source AI testing platform for QA teams.",
+  "description": "AITestAutomate is an open-source AI testing platform for QA teams.",
   "workspaces": [
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace @testclaw/api & npm run dev --workspace @testclaw/web",
-    "dev:api": "npm run dev --workspace @testclaw/api",
-    "dev:web": "npm run dev --workspace @testclaw/web",
-    "build": "npm run build --workspace @testclaw/api && npm run build --workspace @testclaw/web",
-    "check": "npm run check --workspace @testclaw/api && npm run check --workspace @testclaw/web",
-    "start": "npm run start --workspace @testclaw/api"
+    "dev": "npm run dev --workspace @AITestAutomate/api & npm run dev --workspace @AITestAutomate/web",
+    "dev:api": "npm run dev --workspace @AITestAutomate/api",
+    "dev:web": "npm run dev --workspace @AITestAutomate/web",
+    "build": "npm run build --workspace @AITestAutomate/api && npm run build --workspace @AITestAutomate/web",
+    "check": "npm run check --workspace @AITestAutomate/api && npm run check --workspace @AITestAutomate/web",
+    "start": "npm run start --workspace @AITestAutomate/api"
   },
   "keywords": [
     "ai-testing",

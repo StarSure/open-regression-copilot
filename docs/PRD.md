@@ -2,7 +2,7 @@
 
 ## Product Name
 
-Open Regression Copilot
+AITestAutomate
 
 ## Product Type
 

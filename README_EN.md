@@ -1,4 +1,4 @@
-# TestClaw
+# AITestAutomate
 
 An open-source AI automation testing platform for QA teams.
 
@@ -8,12 +8,14 @@ It currently focuses on one clear scenario:
 
 ## Highlights
 
-- Import HAR files or request samples
+- Import OpenAPI / Swagger
+- Import Postman Collection
+- Import HAR
+- Import cURL
+- Import manual JSON samples
 - Discover business APIs automatically
-- Group and normalize API assets
 - Generate API test cases
 - Run tests and show reports
-- Explain failures with readable output
 - Persist workspace state with SQLite
 - Start with Docker Compose
 

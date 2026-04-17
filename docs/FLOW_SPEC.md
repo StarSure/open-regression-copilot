@@ -1,6 +1,6 @@
 # Flow Spec v0.1
 
-Flow Spec is the central format of Open Regression Copilot.
+Flow Spec is the central format of AITestAutomate.
 
 It describes a business regression flow in a way that is readable by QA engineers and executable by the platform.
 

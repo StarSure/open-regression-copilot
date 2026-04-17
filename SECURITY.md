@@ -1,6 +1,6 @@
 # Security Policy
 
-TestClaw can process browser traffic, headers, cookies, tokens, request bodies, and response bodies.
+AITestAutomate can process browser traffic, headers, cookies, tokens, request bodies, and response bodies.
 
 Use it carefully.
 

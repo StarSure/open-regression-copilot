@@ -30,7 +30,7 @@ if (existsSync(webDistPath)) {
 
 app.get("/health", async () => ({
   ok: true,
-  service: "testclaw-api"
+  service: "aitestautomate-api"
 }));
 
 app.get("/api/workspace", async () => serializeState(state));
@@ -229,7 +229,7 @@ app.get("/", async (_request, reply) => {
 
   return {
     ok: true,
-    message: "TestClaw API is running. Build the web app to serve the frontend from this service."
+    message: "AITestAutomate API is running. Build the web app to serve the frontend from this service."
   };
 });
 

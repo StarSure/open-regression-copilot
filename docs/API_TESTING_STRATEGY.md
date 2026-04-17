@@ -1,6 +1,6 @@
 # API Testing Strategy v0.1
 
-This document explains how Open Regression Copilot should discover APIs from a web platform and generate automated API tests.
+This document explains how AITestAutomate should discover APIs from a web platform and generate automated API tests.
 
 ## Product Idea
 
@@ -251,4 +251,3 @@ The first demo should show:
 5. User runs the API tests.
 6. One test fails because response schema changed.
 7. AI explains the failure as an API contract change.
-

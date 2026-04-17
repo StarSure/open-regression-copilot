@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="./assets/brand/logo.svg" alt="TestClaw Logo" width="140" />
-  <h1>TestClaw</h1>
+  <img src="./assets/brand/logo.svg" alt="AITestAutomate Logo" width="140" />
+  <h1>AITestAutomate</h1>
   <p><strong>面向测试团队的开源 AI 自动化测试平台，支持接口发现、测试用例生成与回归执行。</strong></p>
   <p>
     <a href="https://github.com/StarSure/AITestAutomate/blob/main/README.md">中文</a>
@@ -39,7 +39,7 @@
 - `2026-04-17`：公开发布第一版 MVP
 - `2026-04-17`：完成中文控制台与 GitHub 开源仓库初始化
 - `2026-04-17`：补充项目截图、双语 README、FAQ 与更新日志
-- `2026-04-17`：完成品牌升级为 TestClaw，并接入 SQLite 与 Docker
+- `2026-04-17`：完成品牌升级为 AITestAutomate，并接入 SQLite 与 Docker
 
 ---
 
@@ -51,7 +51,7 @@
 
 ## 项目简介
 
-TestClaw 不是一个只会“生成代码”的 AI 工具，而是一个更适合测试团队落地使用的自动化测试工作台。
+AITestAutomate 不是一个只会“生成代码”的 AI 工具，而是一个更适合测试团队落地使用的自动化测试工作台。
 
 它当前已经支持：
 
@@ -189,7 +189,7 @@ http://localhost:4318
 说明：
 
 - Docker 模式下后端会直接托管前端页面
-- SQLite 数据文件保存在 `.data/testclaw.db`
+- SQLite 数据文件保存在 `.data/aitestautomate.db`
 
 ---
 
@@ -208,7 +208,7 @@ http://localhost:4318
 ## 项目结构
 
 ```text
-testclaw/
+AITestAutomate/
   apps/
     api/        本地 API 服务
     web/        前端控制台
@@ -279,3 +279,4 @@ docker compose up --build
 ## 开源协议
 
 Apache-2.0
+

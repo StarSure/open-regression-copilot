@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping build TestClaw.
+Thanks for helping build AITestAutomate.
 
 ## Development Setup
 
