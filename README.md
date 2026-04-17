@@ -1,10 +1,23 @@
-# Open Regression Copilot
-
-面向测试团队的开源 AI 自动化测试平台。
-
-当前版本先聚焦一个清晰场景：
-
-**从网页平台流量中自动发现接口，生成接口测试用例，并执行回归测试。**
+<div align="center">
+  <h1>AI测试平台</h1>
+  <p><strong>面向测试团队的开源 AI 自动化测试平台，支持接口发现、测试用例生成与回归执行。</strong></p>
+  <p>
+    <a href="https://github.com/StarSure/open-regression-copilot/blob/main/README.md">中文</a>
+    ·
+    <a href="https://github.com/StarSure/open-regression-copilot/blob/main/README_EN.md">English</a>
+    ·
+    <a href="https://github.com/StarSure/open-regression-copilot#本地启动">快速开始</a>
+    ·
+    <a href="https://github.com/StarSure/open-regression-copilot/tree/main/docs">完整文档</a>
+  </p>
+  <p>
+    <img src="https://img.shields.io/github/license/StarSure/open-regression-copilot?style=for-the-badge" alt="license" />
+    <img src="https://img.shields.io/badge/Node.js-20%2B-4b8b3b?style=for-the-badge" alt="node" />
+    <img src="https://img.shields.io/badge/status-MVP-2f6d99?style=for-the-badge" alt="status" />
+    <img src="https://img.shields.io/github/stars/StarSure/open-regression-copilot?style=for-the-badge" alt="stars" />
+    <img src="https://img.shields.io/github/issues/StarSure/open-regression-copilot?style=for-the-badge" alt="issues" />
+  </p>
+</div>
 
 ---
 
@@ -16,9 +29,9 @@
 
 ## 项目简介
 
-Open Regression Copilot 不是一个只会“生成代码”的 AI 工具，而是一个更适合测试团队落地使用的自动化测试工作台。
+AI测试平台不是一个只会“生成代码”的 AI 工具，而是一个更适合测试团队落地使用的自动化测试工作台。
 
-它目前已经支持：
+它当前已经支持：
 
 - 导入 HAR 文件或请求样本
 - 自动识别业务接口
