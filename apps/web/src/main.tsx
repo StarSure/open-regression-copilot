@@ -127,9 +127,9 @@ function App() {
   const [selectedNav, setSelectedNav] = useState<NavKey>("dashboard");
   const [importMode, setImportMode] = useState<ImportMode>("openapi");
   const [selectedEndpoint, setSelectedEndpoint] = useState<string | null>(null);
-  const [captureUrl, setCaptureUrl] = useState("https://demo-shop.local");
-  const [captureUsername, setCaptureUsername] = useState("admin");
-  const [capturePassword, setCapturePassword] = useState("REDACTED_PASSWORD");
+  const [captureUrl, setCaptureUrl] = useState("");
+  const [captureUsername, setCaptureUsername] = useState("");
+  const [capturePassword, setCapturePassword] = useState("");
   const [openApiText, setOpenApiText] = useState(defaultOpenApiText);
   const [postmanText, setPostmanText] = useState(defaultPostmanText);
   const [harText, setHarText] = useState("");
@@ -623,14 +623,27 @@ function App() {
             <Panel title="网页抓取" icon={<Radar size={18} />} action={<button className="primary-button inline-button" onClick={captureWebPage} disabled={busy}><Play size={16} />开始抓取</button>}>
               <div className="project-form">
                 <FormField label="目标地址">
-                  <input value={captureUrl} onChange={(event) => setCaptureUrl(event.target.value)} />
+                  <input
+                    value={captureUrl}
+                    onChange={(event) => setCaptureUrl(event.target.value)}
+                    placeholder="请输入要抓取的网页地址"
+                  />
                 </FormField>
                 <div className="form-grid">
                   <FormField label="用户名">
-                    <input value={captureUsername} onChange={(event) => setCaptureUsername(event.target.value)} />
+                    <input
+                      value={captureUsername}
+                      onChange={(event) => setCaptureUsername(event.target.value)}
+                      placeholder="选填"
+                    />
                   </FormField>
                   <FormField label="密码">
-                    <input type="password" value={capturePassword} onChange={(event) => setCapturePassword(event.target.value)} />
+                    <input
+                      type="password"
+                      value={capturePassword}
+                      onChange={(event) => setCapturePassword(event.target.value)}
+                      placeholder="选填"
+                    />
                   </FormField>
                 </div>
               </div>
