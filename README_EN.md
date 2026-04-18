@@ -13,6 +13,7 @@ It currently focuses on one clear scenario:
 - Import HAR
 - Import cURL
 - Import manual JSON samples
+- Use a clean Chinese console with left navigation and quick actions
 - Discover business APIs automatically
 - Generate API test cases
 - Run tests and show reports
@@ -72,4 +73,3 @@ http://localhost:4318
 ## License
 
 Apache-2.0
-

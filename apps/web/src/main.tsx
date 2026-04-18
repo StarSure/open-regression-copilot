@@ -297,8 +297,8 @@ function App() {
             <Radar size={18} />
           </span>
           <div>
-            <strong>AITestAutomate</strong>
-            <small>AI Testing Platform</small>
+            <strong>AI测试平台</strong>
+            <small>AITestAutomate</small>
           </div>
         </div>
 
@@ -334,22 +334,56 @@ function App() {
       </aside>
 
       <section className="main-panel">
-        <header className="page-header">
-          <div>
-            <h1>AITestAutomate</h1>
-            <p>面向测试团队的接口发现、测试生成与回归执行平台。</p>
+        <section className="hero-banner">
+          <header className="page-header">
+            <div>
+              <span className="eyebrow-label">AITestAutomate Console</span>
+              <h1>回归测试工作台</h1>
+              <p>从网页抓取、接口导入到自动生成用例与执行回归，先把测试团队最常用的一条链路跑通。</p>
+            </div>
+            <div className="header-actions">
+              <button className="secondary-button" onClick={resetSample} disabled={busy}>
+                <RotateCcw size={16} />
+                刷新工作区
+              </button>
+              <button className="primary-button" onClick={runTests} disabled={busy}>
+                <Play size={16} />
+                运行测试
+              </button>
+            </div>
+          </header>
+
+          <div className="hero-meta">
+            <span className="meta-pill">社区版 MVP</span>
+            <span className="meta-pill">接口自动化</span>
+            <span className="meta-pill">网页元素抓取</span>
+            <span className="meta-pill">SQLite / Docker</span>
           </div>
-          <div className="header-actions">
-            <button className="secondary-button" onClick={resetSample} disabled={busy}>
-              <RotateCcw size={16} />
-              刷新工作区
-            </button>
-            <button className="primary-button" onClick={runTests} disabled={busy}>
-              <Play size={16} />
-              运行测试
-            </button>
+
+          <div className="hero-status-grid">
+            <div className="spotlight-card">
+              <span className="spotlight-label">当前项目</span>
+              <strong>{workspace?.project.name ?? "AITestAutomate"}</strong>
+              <p>
+                {workspace?.project.baseUrl ? `Base URL：${workspace.project.baseUrl}` : "先配置 Base URL，后续导入和抓取会更顺畅。"}
+              </p>
+            </div>
+            <div className="spotlight-card">
+              <span className="spotlight-label">平台状态</span>
+              <strong>{busy ? "处理中" : "准备就绪"}</strong>
+              <p>{statusMessage}</p>
+            </div>
+            <div className="spotlight-card">
+              <span className="spotlight-label">快捷入口</span>
+              <div className="quick-links">
+                <button className="ghost-chip" onClick={() => setSelectedNav("capture")}>网页抓取</button>
+                <button className="ghost-chip" onClick={() => setSelectedNav("discover")}>接口导入</button>
+                <button className="ghost-chip" onClick={() => setSelectedNav("reports")}>执行报告</button>
+              </div>
+              <p>最近更新时间：{formatDate(workspace?.summary.updatedAt)}</p>
+            </div>
           </div>
-        </header>
+        </section>
 
         <section className="summary-row">
           <MetricCard title="采集请求" value={workspace?.summary.requests ?? 0} icon={<Upload size={18} />} />
@@ -362,13 +396,13 @@ function App() {
           <section className="content-grid two-col">
             <Panel title="平台说明" icon={<Bot size={18} />}>
               <div className="info-block">
-                <p>当前版本聚焦接口自动化测试。</p>
-                <p>你可以导入 OpenAPI、Postman、HAR、cURL 或请求样本，也可以直接输入网页地址进行自动抓取。</p>
-                <p>后续会继续接入网页录制、Playwright 抓接口、测试历史持久化和 GitHub 集成。</p>
+                <p>当前版本先聚焦接口自动化测试，优先服务测试团队做回归。</p>
+                <p>支持 OpenAPI、Postman、HAR、cURL、请求样本导入，也支持直接输入网页地址进行抓取。</p>
+                <p>后续会继续增强页面录制、登录态复用、定时任务和团队协作能力。</p>
               </div>
             </Panel>
 
-            <Panel title="当前项目" icon={<FolderCog size={18} />}>
+            <Panel title="工作区概览" icon={<FolderCog size={18} />}>
               <div className="kv-list">
                 <Kv label="项目名称" value={workspace?.project.name ?? "-"} />
                 <Kv label="环境" value={workspace?.project.environmentName ?? "-"} />
@@ -382,11 +416,11 @@ function App() {
               {activeEndpoint ? <EndpointOverview endpoint={activeEndpoint} /> : <EmptyText text="暂无接口数据。" />}
             </Panel>
 
-            <Panel title="平台状态" icon={<CheckCircle2 size={18} />}>
+            <Panel title="本地服务" icon={<CheckCircle2 size={18} />}>
               <div className="info-block">
                 <p>前端地址：`http://localhost:5173/`</p>
                 <p>接口地址：`http://localhost:4318/`</p>
-                <p>状态持久化文件：`.data/workspace.json`</p>
+                <p>状态持久化文件：`.data/aitestautomate.db`</p>
               </div>
             </Panel>
           </section>

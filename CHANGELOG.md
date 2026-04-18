@@ -21,3 +21,4 @@ All notable changes to this project will be documented in this file.
 - Updated project branding to `AITestAutomate`.
 - Updated documentation to reflect multi-source import support.
 - Updated the sidebar footer to link directly to the GitHub repository.
+- Refined the Chinese control panel with a simpler enterprise-style layout and unified local service copy.
